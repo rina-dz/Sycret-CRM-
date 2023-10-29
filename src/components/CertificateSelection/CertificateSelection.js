@@ -10,7 +10,7 @@ function CertificateSelection(props) {
     const [isDivVisible, changeVisibilityState] = React.useState(false);
     const [price, changePrice] = React.useState('Цена - 4500 р.');
 
-
+    //добавить недоступную версию кнопки при невыбранном сертификате
 
     return (
         <>

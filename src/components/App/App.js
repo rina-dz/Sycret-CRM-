@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext.js';
 import PaymentForm from '../PaymentForm/PaymentForm';
 import CertificateSelection from '../CertificateSelection/CertificateSelection';
-//import NotFound from '../NotFound/NotFound';
+import NotFound from '../NotFound/NotFound';
 
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Route path="/form" element={<PaymentForm
 
           />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </CurrentUserContext.Provider>
