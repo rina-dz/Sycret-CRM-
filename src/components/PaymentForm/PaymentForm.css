@@ -1,6 +1,7 @@
 .payment-form__container {
     width: 40%;
     min-width: 400px;
+    max-width: 480px;
     background-color: #333333;
     border-radius: 10px;
     display: flex;

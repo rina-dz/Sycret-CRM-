@@ -38,8 +38,6 @@ function PaymentForm(props) {
 
                     </form>
                     <Link className="payment-form__rules-link button" to="https://sycret.ru/">Правила</Link>
-
-
                     <div className="payment-form__links">
                         <Link className="payment-form__link button" to="/">Назад</Link>
                         <Link className="payment-form__link button" to="/payment">Перейти к оплате</Link>
