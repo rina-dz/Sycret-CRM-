@@ -79,13 +79,19 @@
     min-height: 18px;
     max-width: 396px;
     color: #FF4062;
-    font-size: 10px;
+    font-size: 12px;
     font-family: "Open Sans", sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     padding: 0;
     margin-bottom: 10px;
+    margin-left: 10px;
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
 }
 
 .payment-form__rules-link {
@@ -109,8 +115,9 @@
     margin: 0 auto 30px;
 }
 
-.payment-form__link {
+.payment-form__button {
     font-family: "Open Sans", sans-serif;
+    border: none;
     border-radius: 30px;
     background-color: #2291FF;
     text-decoration: none;

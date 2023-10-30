@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./CertificateSelection.css";
 import selection_icon from '../../images/selection_icon.png';
 import background_img from '../../images/background.png';
@@ -10,15 +10,21 @@ function CertificateSelection(props) {
     const [selectedName, changeSelectedName] = React.useState('Выберите товар');
     const [isDivVisible, changeVisibilityState] = React.useState(false);
     const [price, changePrice] = React.useState('');
+    const navigate = useNavigate();
+
 
     function selectСertificate(cert) {
         changeSelectedCert(cert);
         changeSelectedName(cert.NAME);
         changePrice(`Цена - ${cert.SUMMA} р.`);
-        props.handleSelectСertificate(cert);
         changeVisibilityState(false);
     }
 
+    function sendInfo() {
+        const cert = selectedCert;
+        localStorage.setItem('selectedCert', JSON.stringify(cert));
+        navigate('/form', { replace: true });
+    }
 
     return (
         <>
@@ -36,7 +42,8 @@ function CertificateSelection(props) {
                     </div>
                     <div className="cert-selection__links">
                         <p className="cert-selection__price">{price}</p>
-                        <Link className={"cert-selection__link" + (selectedCert ? " button" : " disable-button")} to="/form">Оформить</Link>
+                        <button className={"cert-selection__button" + (selectedCert ? " button" : " disable-button")}
+                            disabled={selectedCert ? false : true} onClick={sendInfo}>Оформить</button>
                     </div>
                 </div>
                 <img className="background-img" src={background_img} alt="Фоновое изображение" />

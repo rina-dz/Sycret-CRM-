@@ -8,11 +8,11 @@ import PaymentLoading from '../PaymentLoading/PaymentLoading';
 import NotFound from '../NotFound/NotFound';
 import { newMainApi } from '../../utils/MainApi.js';
 
-
 function App() {
+  
   const [currentUser, setCurrentUser] = React.useState({});
   const [сertificates, addCertificates] = React.useState([]);
-  const [selectedCert, changeSelectedCert] = React.useState({});
+  const navigate = useNavigate();
 
 
   React.useEffect(() => {
@@ -22,14 +22,19 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
+    navigate('/', { replace: false });
   }, []);
 
-  function selectСertificate(cert) {
-    changeSelectedCert(cert);
-    changeSelectedCert(selectedCert);
+  function saveInformation(info) {
+    newMainApi.saveInfo(info)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -37,10 +42,9 @@ function App() {
         <Routes>
           <Route path="/" element={<CertificateSelection
             сertificates={сertificates}
-            handleSelectСertificate={selectСertificate}
           />} />
           <Route path="/form" element={<PaymentForm
-            сertificate={selectedCert}
+            onSubmit={saveInformation}
           />} />
           <Route path="/payment" element={<PaymentLoading />} />
           <Route path="*" element={<NotFound />} />
