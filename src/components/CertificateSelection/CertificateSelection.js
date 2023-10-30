@@ -6,11 +6,19 @@ import background_img from '../../images/background.png';
 
 function CertificateSelection(props) {
 
+    const [selectedCert, changeSelectedCert] = React.useState();
     const [selectedName, changeSelectedName] = React.useState('Выберите товар');
     const [isDivVisible, changeVisibilityState] = React.useState(false);
-    const [price, changePrice] = React.useState('Цена - 4500 р.');
+    const [price, changePrice] = React.useState('');
 
-    //добавить недоступную версию кнопки при невыбранном сертификате
+    function selectСertificate(cert) {
+        changeSelectedCert(cert);
+        changeSelectedName(cert.NAME);
+        changePrice(`Цена - ${cert.SUMMA} р.`);
+        props.handleSelectСertificate(cert);
+        changeVisibilityState(false);
+    }
+
 
     return (
         <>
@@ -22,15 +30,13 @@ function CertificateSelection(props) {
                         <img className="cert-selection__icon button" src={selection_icon} alt="Иконка профиля" onClick={() => { changeVisibilityState(!isDivVisible); }} />
                     </div>
                     <div className={'cert-selection__all-cert' + (isDivVisible ? '' : ' hidden')}>
-                        <p className="cert-selection__cert">Сертификат на 50000р</p>
-                        <p className="cert-selection__cert">Сертификат на 25000р</p>
-                        <p className="cert-selection__cert">Сертификат на 10000р</p>
-                        <p className="cert-selection__cert">Сертификат на 30000р</p>
-                        <p className="cert-selection__cert">Сертификат на 45000р</p>
+                        {props.сertificates.map((el) => (
+                            <p className="cert-selection__cert" key={el.ID} onClick={() => { selectСertificate(el); }}>{el.NAME}</p>
+                        ))}
                     </div>
                     <div className="cert-selection__links">
-                        <h2 className="cert-selection__price">{price}</h2>
-                        <Link className="cert-selection__link button" to="/form">Купить</Link>
+                        <p className="cert-selection__price">{price}</p>
+                        <Link className={"cert-selection__link" + (selectedCert ? " button" : " disable-button")} to="/form">Оформить</Link>
                     </div>
                 </div>
                 <img className="background-img" src={background_img} alt="Фоновое изображение" />
